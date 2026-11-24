@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>University Exam Portal</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- خط عصري قريب من تصميم الموبايل -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- حاوية تحاكي شاشة الموبايل وتعمل بشكل متجاوب على الكمبيوتر والموبايل -->
+  <div class="app-wrapper">
+    <main class="phone-frame">
+
+      <!-- ==================== 1. شاشة تسجيل الدخول ==================== -->
+      <section id="screen-login" class="screen active">
+        <div class="header-box">
+          <h1>University Exam Login</h1>
+          <p>Please enter your name &amp; student ID &amp; academic department and choose your exam</p>
+        </div>
+
+        <form id="login-form" class="login-form">
+          <div class="form-group">
+            <label for="student-name">Student Name :</label>
+            <input type="text" id="student-name" placeholder="Student Name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="student-id">Student ID :</label>
+            <input type="text" id="student-id" placeholder="Student ID" required />
+          </div>
+
+          <div class="form-group">
+            <label for="academic-dept">Academic Department :</label>
+            <div class="custom-select-wrapper">
+              <select id="academic-dept" required>
+                <option value="" disabled selected>Academic Department</option>
+                <option value="Computer Science (CS)">Computer Science (CS)</option>
+                <option value="Information System">Information System</option>
+                <option value="Management">Management</option>
+              </select>
+            </div>
+          </div>
+
+          <p id="login-error" class="error-msg"></p>
+
+          <div class="center-btn-box">
+            <button type="submit" class="btn-outline-blue">Login</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- ==================== 2. شاشة اختيار الامتحان ==================== -->
+      <section id="screen-subjects" class="screen">
+        <div class="top-pill-header">
+          <span>Choose your exam</span>
+        </div>
+
+        <p id="welcome-student" class="student-badge"></p>
+
+        <div class="subjects-grid">
+          <div class="subject-card">
+            <h3>Algorithms &amp; problem solving</h3>
+            <button class="btn-primary-sm" onclick="selectSubject('algorithms')">Take Exam</button>
+          </div>
+
+          <div class="subject-card">
+            <h3>Database</h3>
+            <button class="btn-primary-sm" onclick="selectSubject('database')">Take Exam</button>
+          </div>
+
+          <div class="subject-card">
+            <h3>Web Programming</h3>
+            <button class="btn-primary-sm" onclick="selectSubject('web')">Take Exam</button>
+          </div>
+        </div>
+
+        <div class="bottom-logout">
+          <button class="btn-ghost" onclick="logout()">← Logout</button>
+        </div>
+      </section>
+
+      <!-- ==================== 3. شاشة بداية الامتحان والتعليمات ==================== -->
+      <section id="screen-start" class="screen">
+        <div class="nav-header">
+          <button class="back-btn" onclick="showScreen('screen-subjects')">&#8249;</button>
+          <h2>Start Quiz</h2>
+        </div>
+
+        <div class="sheet-card">
+          <p class="subtitle-text">Put your understanding of this concept to test by answering a few MCQs</p>
+
+          <div class="hero-banner">
+            <div class="hero-banner-content">
+              <div class="hero-text">
+                <h3 id="start-banner-title">Pair of linear Equation two variables</h3>
+              </div>
+              <div class="hero-illustration">
+                <!-- رسم توضيحي بسيط يحاكي الصورة في التصميم -->
+                <div class="board-icon">📊</div>
+              </div>
+            </div>
+            <div class="hero-subject-bar">
+              Subject : <span id="start-subject-name">Algorithms &amp; problem solving</span>
+            </div>
+          </div>
+
+          <div class="meta-info">
+            <p><strong>Total Questions:</strong> <span id="start-total-q">10</span></p>
+            <p><strong>Total Time:</strong> <span id="start-total-time">15 min</span></p>
+          </div>
+
+          <div class="instructions-box">
+            <h4>Instructions:</h4>
+            <p>
+              The quizzes consists of questions carefully designed to help you self-assess your
+              comprehension of the information presented on the topics covered in the module.
+            </p>
+            <p>
+              After responding to a question, click on the "Next" button at the bottom to go
+              to the next question. After responding to the 10th question, click on "Submit" on the top
+              of the window to exit the quiz.
+            </p>
+          </div>
+
+          <div class="start-footer-bar">
+            <div class="time-pill">
+              <span>&#9201;</span> <span id="start-pill-time">15:00</span>
+            </div>
+            <button class="btn-primary-wide" onclick="startQuiz()">Start Quiz</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 4. شاشة الامتحان (الأسئلة) ==================== -->
+      <section id="screen-quiz" class="screen">
+        <div class="nav-header space-between">
+          <div class="nav-left">
+            <button class="back-btn" onclick="confirmExitQuiz()">&#8249;</button>
+            <h2>Quiz</h2>
+          </div>
+          <button class="btn-outline-sm" onclick="submitQuiz()">Submit</button>
+        </div>
+
+        <!-- شريط التنقل السريع بين الأسئلة -->
+        <div class="quick-nav-box">
+          <span class="quick-nav-label">Quick Navigation</span>
+          <div id="quick-nav-numbers" class="quick-nav-numbers">
+            <!-- يتم توليد الأرقام 1 إلى 10 تلقائياً بالـ JS -->
+          </div>
+        </div>
+
+        <!-- عداد الوقت -->
+        <div class="timer-container">
+          <div class="timer-pill">
+            <span>&#9201;</span> <span id="quiz-timer">15:00</span>
+          </div>
+        </div>
+
+        <!-- كارت السؤال والاختيارات -->
+        <div class="sheet-card quiz-sheet">
+          <div class="question-header">
+            <span id="question-counter" class="q-number">Q.1/10</span>
+            <h3 id="question-text" class="q-text">What is an Algorithm ?</h3>
+          </div>
+
+          <div id="options-list" class="options-list">
+            <!-- الاختيارات a, b, c, d يتم توليدها تلقائياً -->
+          </div>
+
+          <div class="quiz-controls">
+            <button id="btn-prev" class="btn-dark" onclick="prevQuestion()">Previous</button>
+            <button id="btn-next" class="btn-primary-sm" onclick="nextQuestion()">Next</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 5. شاشة النتيجة ==================== -->
+      <section id="screen-result" class="screen">
+        <div class="nav-header">
+          <button class="back-btn" onclick="showScreen('screen-subjects')">&#8249;</button>
+          <h2>Quiz Result</h2>
+        </div>
+
+        <div class="result-subject-box">
+          <h3 id="result-subject-name">Algorithms &amp; problem solving</h3>
+        </div>
+
+        <!-- دائرة النتيجة -->
+        <div class="score-summary-card">
+          <div class="score-circle" id="score-circle">
+            <span id="score-fraction">8/10</span>
+          </div>
+          <p id="score-message" class="score-message">
+            Congratulations ! you have passed this test with 80%
+          </p>
+        </div>
+
+        <!-- الكروت الـ 4 الملونة -->
+        <div class="stats-grid">
+          <div class="stat-card card-green">
+            <span id="stat-correct" class="stat-num">8</span>
+            <span class="stat-label">Correct Answers</span>
+          </div>
+
+          <div class="stat-card card-red">
+            <span id="stat-wrong" class="stat-num">2</span>
+            <span class="stat-label">Wrong Answers</span>
+          </div>
+
+          <div class="stat-card card-blue">
+            <span class="stat-icon">&#9201;</span>
+            <span id="stat-total-time" class="stat-num-sm">15m</span>
+            <span class="stat-label">Total Time</span>
+          </div>
+
+          <div class="stat-card card-orange">
+            <span class="stat-icon">&#9201;</span>
+            <span id="stat-time-taken" class="stat-num-sm">13m 20sec</span>
+            <span class="stat-label">Time Taken</span>
+          </div>
+        </div>
+
+        <button class="btn-primary-full" onclick="openReviewScreen()">Check Answers</button>
+      </section>
+
+      <!-- ==================== 6. شاشة مراجعة الإجابات ==================== -->
+      <section id="screen-review" class="screen">
+        <div class="nav-header">
+          <button class="back-btn" onclick="showScreen('screen-result')">&#8249;</button>
+          <h2>Review Answers</h2>
+        </div>
+
+        <div id="review-list" class="review-list">
+          <!-- تفاصيل كل سؤال وإجابة الطالب والإجابة الصحيحة -->
+        </div>
+
+        <button class="btn-primary-full" onclick="showScreen('screen-subjects')">Back to Exams</button>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ربط ملف الجافاسكريبت -->
+  <script src="app.js"></script>
+</body>
+</html>

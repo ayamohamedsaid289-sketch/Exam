@@ -1,0 +1,627 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background-color: #111416;
+  color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+}
+
+/* إطار الموبايل المتجاوب */
+.app-wrapper {
+  width: 100%;
+  max-width: 410px;
+}
+
+.phone-frame {
+  background-color: #1c2124;
+  border-radius: 28px;
+  min-height: 760px;
+  padding: 24px 18px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65);
+  border: 1px solid #2c3439;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* التحكم في ظهور الشاشات */
+.screen {
+  display: none;
+  flex-direction: column;
+  flex: 1;
+  animation: fadeIn 0.25s ease-in-out;
+}
+
+.screen.active {
+  display: flex;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==================== 1. شاشة تسجيل الدخول ==================== */
+.header-box {
+  border: 1.5px solid #1ea7e1;
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 20px;
+  margin-bottom: 32px;
+}
+
+.header-box h1 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #ffffff;
+}
+
+.header-box p {
+  font-size: 12px;
+  color: #b0b8bd;
+  line-height: 1.5;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 13px;
+  color: #d6dde1;
+}
+
+.form-group input,
+.form-group select {
+  background-color: #252b2f;
+  border: 1px solid #353e44;
+  border-radius: 10px;
+  padding: 13px 14px;
+  color: #ffffff;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-group input::placeholder {
+  color: #7c878e;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #1ea7e1;
+}
+
+.error-msg {
+  color: #ff6b6b;
+  font-size: 12px;
+  text-align: center;
+  min-height: 16px;
+}
+
+.center-btn-box {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.btn-outline-blue {
+  background: transparent;
+  border: 1.5px solid #1ea7e1;
+  color: #ffffff;
+  padding: 10px 34px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-outline-blue:hover {
+  background-color: #1ea7e1;
+  color: #ffffff;
+}
+
+/* ==================== 2. شاشة اختيار المادة ==================== */
+.top-pill-header {
+  align-self: center;
+  border: 1.5px solid #1ea7e1;
+  border-radius: 12px;
+  padding: 12px 32px;
+  margin-top: 16px;
+  margin-bottom: 14px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.student-badge {
+  text-align: center;
+  font-size: 12px;
+  color: #9aa5ac;
+  margin-bottom: 24px;
+}
+
+.subjects-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.subject-card {
+  border: 1.5px solid #1ea7e1;
+  border-radius: 14px;
+  padding: 18px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  min-height: 150px;
+  background-color: #1f2529;
+}
+
+.subject-card h3 {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #e5ecef;
+}
+
+.btn-primary-sm {
+  background-color: #1ea7e1;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-primary-sm:hover {
+  background-color: #168ec2;
+}
+
+.bottom-logout {
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.btn-ghost {
+  background: transparent;
+  border: none;
+  color: #9aa5ac;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.btn-ghost:hover {
+  color: #ffffff;
+}
+
+/* ==================== شريط التنقل العلوي المشترك ==================== */
+.nav-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.nav-header.space-between {
+  justify-content: space-between;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-header h2 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.back-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1px solid #3c464d;
+  background-color: #242a2e;
+  color: #ffffff;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.btn-outline-sm {
+  background: transparent;
+  border: 1.5px solid #1ea7e1;
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.btn-outline-sm:hover {
+  background: #1ea7e1;
+}
+
+/* ==================== 3. شاشة بداية الامتحان ==================== */
+.sheet-card {
+  background-color: #262c30;
+  border-radius: 22px;
+  padding: 18px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.subtitle-text {
+  font-size: 12px;
+  color: #b7c0c5;
+  line-height: 1.4;
+  margin-bottom: 14px;
+}
+
+.hero-banner {
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #2196f3, #1565c0);
+}
+
+.hero-banner-content {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hero-text h3 {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+  max-width: 190px;
+}
+
+.board-icon {
+  font-size: 40px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 10px;
+  border-radius: 12px;
+}
+
+.hero-subject-bar {
+  background-color: #161a1d;
+  padding: 8px 14px;
+  font-size: 12px;
+  color: #d6dde1;
+}
+
+.meta-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  margin-bottom: 14px;
+}
+
+.instructions-box h4 {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.instructions-box p {
+  font-size: 12px;
+  color: #b7c0c5;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.start-footer-bar {
+  margin-top: auto;
+  background-color: #1c2124;
+  padding: 10px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.time-pill {
+  border: 1px solid #444f56;
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-primary-wide {
+  flex: 1;
+  background-color: #1ea7e1;
+  border: none;
+  color: #ffffff;
+  padding: 11px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ==================== 4. شاشة الامتحان ==================== */
+.quick-nav-box {
+  border: 1.5px solid #1ea7e1;
+  border-radius: 14px;
+  padding: 10px 12px;
+  margin-bottom: 14px;
+}
+
+.quick-nav-label {
+  display: block;
+  font-size: 12px;
+  color: #d0d7dc;
+  margin-bottom: 8px;
+}
+
+.quick-nav-numbers {
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.q-dot {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: none;
+  background-color: #353e44;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.q-dot.answered {
+  background-color: #2c6e8a;
+}
+
+.q-dot.active {
+  background-color: #1ea7e1;
+  box-shadow: 0 0 8px rgba(30, 167, 225, 0.7);
+}
+
+.timer-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.timer-pill {
+  border: 1px solid #4b565e;
+  border-radius: 10px;
+  padding: 6px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: #22282c;
+}
+
+.quiz-sheet {
+  justify-content: space-between;
+}
+
+.q-number {
+  display: block;
+  font-size: 13px;
+  color: #9aa5ac;
+  margin-bottom: 8px;
+}
+
+.q-text {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 18px;
+}
+
+.options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.option-btn {
+  background-color: #384046;
+  border: 1.5px solid transparent;
+  color: #ffffff;
+  text-align: left;
+  padding: 14px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.option-btn:hover {
+  background-color: #414b52;
+}
+
+.option-btn.selected {
+  background-color: #1ea7e1;
+  border-color: #63c8f5;
+  font-weight: 600;
+}
+
+.quiz-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.btn-dark {
+  background-color: #161a1d;
+  color: #ffffff;
+  border: none;
+  padding: 9px 18px;
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.btn-dark:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ==================== 5. شاشة النتيجة ==================== */
+.result-subject-box {
+  border: 1.5px solid #1ea7e1;
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 18px;
+}
+
+.result-subject-box h3 {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.score-summary-card {
+  border: 1.5px solid #1ea7e1;
+  border-radius: 16px;
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  background-color: #21272b;
+}
+
+.score-circle {
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  border: 5px solid #1ea7e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.score-message {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #e5ecef;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.stat-card {
+  border-radius: 14px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.stat-num {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.stat-num-sm {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.stat-label {
+  font-size: 12px;
+  opacity: 0.95;
+}
+
+.card-green { background-color: #36b368; }
+.card-red   { background-color: #e85353; }
+.card-blue  { background-color: #1ea7e1; }
+.card-orange{ background-color: #f39c38; }
+
+.btn-primary-full {
+  width: 100%;
+  background-color: #1ea7e1;
+  color: #ffffff;
+  border: none;
+  padding: 13px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: auto;
+}
+
+/* ==================== 6. شاشة مراجعة الإجابات ==================== */
+.review-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  max-height: 560px;
+  padding-right: 4px;
+  margin-bottom: 14px;
+}
+
+.review-item {
+  background-color: #252b2f;
+  border-radius: 12px;
+  padding: 12px;
+  border-left: 4px solid #1ea7e1;
+  font-size: 12px;
+}
+
+.review-item.correct { border-left-color: #36b368; }
+.review-item.wrong   { border-left-color: #e85353; }
+
+.review-item h4 {
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.review-item p {
+  margin-bottom: 4px;
+  color: #cfd6da;
+}
